@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -13,7 +14,8 @@ namespace Blog.Models
         public DateTime Date { get; set; }
         public string Message { get; set; }
         public List<Tag> Tags { get; set; }
-        public Reply Replies { get; set; }
-        public User Author { get; set; }
+        public List<Reply> Replies { get; set; }
+        public UserProfile Author { get; set; }
+
     }
 }

@@ -25,11 +25,11 @@ namespace Blog.Filters
         {
             public SimpleMembershipInitializer()
             {
-                Database.SetInitializer<UsersContext>(null);
+                Database.SetInitializer<BlogDBContext>(null);
 
                 try
                 {
-                    using (var context = new UsersContext())
+                    using (var context = new BlogDBContext())
                     {
                         if (!context.Database.Exists())
                         {

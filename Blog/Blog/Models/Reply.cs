@@ -12,7 +12,7 @@ namespace Blog.Models
         public int Id { get; set; }
         public DateTime Date { get; set; }
         public string Message { get; set; }
-        public User Replier { get; set; }
+        public UserProfile Replier { get; set; }
 
 
     }

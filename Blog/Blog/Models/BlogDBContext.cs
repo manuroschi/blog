@@ -8,14 +8,17 @@ using System.Web.Security;
 
 namespace Blog.Models
 {
-    public class UsersContext : DbContext
+    public class BlogDBContext : DbContext
     {
-        public UsersContext()
+        public BlogDBContext()
             : base("DefaultConnection")
         {
         }
-
+        
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<Reply> Replies { get; set; }        
     }
 
     [Table("UserProfile")]

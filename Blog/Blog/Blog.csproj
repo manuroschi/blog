@@ -163,15 +163,16 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MensajesController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\BlogDBContext.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\Reply.cs" />
     <Compile Include="Models\Tag.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -285,6 +286,11 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Mensajes\Index.cshtml" />
+    <Content Include="Views\Mensajes\Details.cshtml" />
+    <Content Include="Views\Mensajes\Create.cshtml" />
+    <Content Include="Views\Mensajes\Edit.cshtml" />
+    <Content Include="Views\Mensajes\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
