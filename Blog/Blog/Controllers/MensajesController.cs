@@ -6,20 +6,33 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Blog.Models;
+using PagedList;
 
 namespace Blog.Controllers
 {
     public class MensajesController : Controller
     {
         private BlogDBContext db = new BlogDBContext();
+        
+        public object Index(int? page)
+        {
+            var posts = db.Posts.ToList(); //returns List<Post>
+            
+            var pageNumber = page ?? 1;
 
+            var onePageOfPosts = posts.ToPagedList(pageNumber, 25); // will only contain 25 posts
+
+            ViewBag.Page = onePageOfPosts;
+            return View();
+        }
+        
         //
         // GET: /Mensajes/
 
-        public ActionResult Index()
-        {
-            return View(db.Posts.ToList());
-        }
+        //public ActionResult Index()
+        //{
+        //    return View(db.Posts.ToList());
+        //}
 
         //
         // GET: /Mensajes/Details/5
