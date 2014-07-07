@@ -20,7 +20,7 @@ namespace Blog.Controllers
             
             var pageNumber = page ?? 1;
 
-            var onePageOfPosts = posts.ToPagedList(pageNumber, 25); // will only contain 25 posts
+            var onePageOfPosts = posts.ToPagedList(pageNumber, 5); // will only contain 5 posts
 
             ViewBag.Page = onePageOfPosts;
             return View();

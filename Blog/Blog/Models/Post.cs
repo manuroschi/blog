@@ -16,6 +16,7 @@ namespace Blog.Models
         public List<Tag> Tags { get; set; }
         public List<Reply> Replies { get; set; }
         public UserProfile Author { get; set; }
+        public bool IsAuthorized { get; set; }
 
     }
 }

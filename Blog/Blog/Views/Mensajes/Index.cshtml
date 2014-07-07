@@ -10,9 +10,19 @@
 
 <!-- loop through each of your products and display it however you want. we're just printing the name here -->
 <h2>List of Posts</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
 <ul>
     @foreach(var post in ViewBag.Page){
-        <li>@post.Message</li>
+        <li>@post.Message
+            @if (User.IsInRole("Admin"))
+            {
+            @Html.ActionLink("Edit", "Edit", new { id=post.Id }) 
+            @Html.ActionLink("Details", "Details", new { id=post.Id }) 
+            @Html.ActionLink("Delete", "Delete", new { id=post.Id })
+            }
+        </li>
     }
 </ul>
 
