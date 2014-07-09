@@ -170,17 +170,18 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MensajesController.cs" />
+    <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201407031456585_first.cs" />
-    <Compile Include="Migrations\201407031456585_first.Designer.cs">
-      <DependentUpon>201407031456585_first.cs</DependentUpon>
+    <Compile Include="Migrations\201407081506193_addTitle.cs" />
+    <Compile Include="Migrations\201407081506193_addTitle.Designer.cs">
+      <DependentUpon>201407081506193_addTitle.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201407062030195_addIsAuthorized.cs" />
-    <Compile Include="Migrations\201407062030195_addIsAuthorized.Designer.cs">
-      <DependentUpon>201407062030195_addIsAuthorized.cs</DependentUpon>
+    <Compile Include="Migrations\201407082247583_addPostsInTag.cs" />
+    <Compile Include="Migrations\201407082247583_addPostsInTag.Designer.cs">
+      <DependentUpon>201407082247583_addPostsInTag.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BlogDBContext.cs" />
@@ -307,6 +308,11 @@
     <Content Include="Views\Mensajes\Edit.cshtml" />
     <Content Include="Views\Mensajes\Delete.cshtml" />
     <Content Include="Views\Mensajes\Index.cshtml" />
+    <Content Include="Views\Tags\Index.cshtml" />
+    <Content Include="Views\Tags\Details.cshtml" />
+    <Content Include="Views\Tags\Create.cshtml" />
+    <Content Include="Views\Tags\Edit.cshtml" />
+    <Content Include="Views\Tags\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -315,11 +321,11 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201407031456585_first.resx">
-      <DependentUpon>201407031456585_first.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201407081506193_addTitle.resx">
+      <DependentUpon>201407081506193_addTitle.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201407062030195_addIsAuthorized.resx">
-      <DependentUpon>201407062030195_addIsAuthorized.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201407082247583_addPostsInTag.resx">
+      <DependentUpon>201407082247583_addPostsInTag.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

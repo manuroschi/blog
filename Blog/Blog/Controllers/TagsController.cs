@@ -6,50 +6,36 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Blog.Models;
-using PagedList;
-using WebMatrix.WebData;
 
 namespace Blog.Controllers
 {
-    public class MensajesController : Controller
+    public class TagsController : Controller
     {
         private BlogDBContext db = new BlogDBContext();
 
-        public object Index(int? page)
+        //
+        // GET: /Tags/
+
+        public ActionResult Index()
         {
-            var posts = db.Posts.Include(x => x.Author).Include(x => x.Tags).Include(x => x.Replies).ToList(); //returns List<Post>
-
-            var pageNumber = page ?? 1;
-
-            var onePageOfPosts = posts.ToPagedList(pageNumber, 5); // will only contain 5 posts
-
-            ViewBag.Page = onePageOfPosts;
-            return View();
+            return View(db.Tags.ToList());
         }
 
         //
-        // GET: /Mensajes/
-
-        //public ActionResult Index()
-        //{
-        //    return View(db.Posts.ToList());
-        //}
-
-        //
-        // GET: /Mensajes/Details/5
+        // GET: /Tags/Details/5
 
         public ActionResult Details(int id = 0)
         {
-            Post post = db.Posts.Find(id);
-            if (post == null)
+            Tag tag = db.Tags.Find(id);
+            if (tag == null)
             {
                 return HttpNotFound();
             }
-            return View(post);
+            return View(tag);
         }
 
         //
-        // GET: /Mensajes/Create
+        // GET: /Tags/Create
 
         public ActionResult Create()
         {
@@ -57,76 +43,73 @@ namespace Blog.Controllers
         }
 
         //
-        // POST: /Mensajes/Create
+        // POST: /Tags/Create
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Post post)
+        public ActionResult Create(Tag tag)
         {
-            post.Date = System.DateTime.Now;
-            post.Author = db.UserProfiles.Find(WebSecurity.CurrentUserId);
-
             if (ModelState.IsValid)
             {
-                db.Posts.Add(post);
+                db.Tags.Add(tag);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(post);
+            return View(tag);
         }
 
         //
-        // GET: /Mensajes/Edit/5
+        // GET: /Tags/Edit/5
 
         public ActionResult Edit(int id = 0)
         {
-            Post post = db.Posts.Find(id);
-            if (post == null)
+            Tag tag = db.Tags.Find(id);
+            if (tag == null)
             {
                 return HttpNotFound();
             }
-            return View(post);
+            return View(tag);
         }
 
         //
-        // POST: /Mensajes/Edit/5
+        // POST: /Tags/Edit/5
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Post post)
+        public ActionResult Edit(Tag tag)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(post).State = EntityState.Modified;
+                db.Entry(tag).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(post);
+            return View(tag);
         }
 
         //
-        // GET: /Mensajes/Delete/5
+        // GET: /Tags/Delete/5
 
         public ActionResult Delete(int id = 0)
         {
-            Post post = db.Posts.Find(id);
-            if (post == null)
+            Tag tag = db.Tags.Find(id);
+            if (tag == null)
             {
                 return HttpNotFound();
             }
-            return View(post);
+            return View(tag);
         }
 
         //
-        // POST: /Mensajes/Delete/5
+        // POST: /Tags/Delete/5
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Post post = db.Posts.Find(id);
-            db.Posts.Remove(post);
+            Tag tag = db.Tags.Find(id);
+            db.Tags.Remove(tag);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

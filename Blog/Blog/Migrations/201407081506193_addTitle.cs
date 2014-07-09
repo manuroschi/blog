@@ -3,7 +3,7 @@ namespace Blog.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class first : DbMigration
+    public partial class addTitle : DbMigration
     {
         public override void Up()
         {
@@ -22,6 +22,7 @@ namespace Blog.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Date = c.DateTime(nullable: false),
+                        Title = c.String(maxLength: 50),
                         Message = c.String(),
                         Author_UserId = c.Int(),
                     })

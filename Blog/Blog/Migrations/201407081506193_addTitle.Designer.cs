@@ -5,13 +5,13 @@ namespace Blog.Migrations
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
-    public sealed partial class addIsAuthorized : IMigrationMetadata
+    public sealed partial class addTitle : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addIsAuthorized));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addTitle));
         
         string IMigrationMetadata.Id
         {
-            get { return "201407062030195_addIsAuthorized"; }
+            get { return "201407081506193_addTitle"; }
         }
         
         string IMigrationMetadata.Source

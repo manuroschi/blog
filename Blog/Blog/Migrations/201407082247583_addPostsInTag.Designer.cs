@@ -5,13 +5,13 @@ namespace Blog.Migrations
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
-    public sealed partial class first : IMigrationMetadata
+    public sealed partial class addPostsInTag : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(first));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addPostsInTag));
         
         string IMigrationMetadata.Id
         {
-            get { return "201407031456585_first"; }
+            get { return "201407082247583_addPostsInTag"; }
         }
         
         string IMigrationMetadata.Source
