@@ -9,6 +9,7 @@ using Blog.Models;
 
 namespace Blog.Controllers
 {
+    [Authorize(Roles="Admin")]
     public class TagsController : Controller
     {
         private BlogDBContext db = new BlogDBContext();
