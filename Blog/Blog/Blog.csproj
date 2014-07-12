@@ -185,6 +185,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BlogDBContext.cs" />
     <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\PostReply.cs" />
     <Compile Include="Models\Reply.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -311,6 +312,7 @@
     <Content Include="Views\Tags\Create.cshtml" />
     <Content Include="Views\Tags\Edit.cshtml" />
     <Content Include="Views\Tags\Delete.cshtml" />
+    <Content Include="Views\Home\Reply.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

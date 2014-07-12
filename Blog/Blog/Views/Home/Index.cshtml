@@ -15,32 +15,61 @@
     @Html.ActionLink("Create New", "Create")
     }
 </p>
-<ul>
-    @foreach(var post in ViewBag.Page){
-        <li>
-            <p><h3>@post.Title</h3> El autor es: @post.Author.UserName</p>
-            <p>@post.Message</p>
-            <p>Tags: <br />            
-            @foreach (var tag in post.Tags)
-            {
-                @tag.Description
-            }
-            </p>
-            <p>Respuestas: <br />
-            @foreach (var reply in post.Replies)
-            { 
-                @reply.Message<br />
-            }
-            </p>
-            @if (User.IsInRole("Admin"))
-            {
-            @Html.ActionLink("Edit", "Edit", new { id=post.Id }) 
-            @Html.ActionLink("Details", "Details", new { id=post.Id }) 
-            @Html.ActionLink("Delete", "Delete", new { id=post.Id })
-            }
-        </li>
+
+<p>
+    @using (Html.BeginForm("Index","Home",FormMethod.Get))
+    {    
+        <p>
+        Tag Filter: @Html.DropDownList("PostTag", "All")
+        <input type="submit" value="Filter" />
+        </p> 
     }
-</ul>
+</p>
+
+<table>
+    @foreach(var post in ViewBag.Page)
+    {
+        <tr>
+            <td>@post.Title</td>
+        </tr>
+        <tr>
+            <td >El autor es: @post.Author.UserName</td>
+        </tr>
+        <tr>
+            <td>@post.Message</td>
+        </tr>
+        <tr>
+            <td>Tags: <br />
+                @foreach (var tag in post.Tags)
+                {
+                    @tag.Description
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>Respuestas: <br />
+                @foreach (var reply in post.Replies)
+                { 
+                    @reply.Message<br />
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @if (WebSecurity.CurrentUserId != -1)
+                {
+                    @Html.ActionLink("Post a reply", "Reply", new { id = post.Id })
+                }
+                @if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id=post.Id }) 
+                    @Html.ActionLink("Details", "Details", new { id=post.Id }) 
+                    @Html.ActionLink("Delete", "Delete", new { id=post.Id })
+                }
+            </td>
+        </tr>
+    }
+</table>
 
 <!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
 @Html.PagedListPager( (IPagedList)ViewBag.Page, page => Url.Action("Index", new { page }) )

@@ -1,0 +1,28 @@
+﻿@model Blog.Models.PostReply
+
+@{
+    ViewBag.Title = "Reply";
+}
+
+<h2>Reply</h2>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        @Html.HiddenFor(model => model.PostId)
+        <legend>Reply</legend>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Comment)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Comment)
+            @Html.ValidationMessageFor(model => model.Comment)
+        </div>
+       
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}

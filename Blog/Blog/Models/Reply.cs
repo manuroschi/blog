@@ -14,6 +14,5 @@ namespace Blog.Models
         public string Message { get; set; }
         public UserProfile Replier { get; set; }
 
-
     }
 }

@@ -15,28 +15,41 @@ namespace Blog.Controllers
     {
         private BlogDBContext db = new BlogDBContext();
 
-        public object Index(int? page)
+        public object Index(int? page, string PostTag)
         {
+            // Tags Filter
+
+            var tags = db.Tags.ToList();
+
+            var tagLst = new List<string>();
+
+            foreach(var t in tags)
+            {
+                tagLst.Add(t.Description);
+            }
+                        
+            ViewBag.PostTag = new SelectList(tagLst);
+
             var posts = db.Posts.Include(x => x.Author).Include(x => x.Tags).Include(x => x.Replies).ToList(); //returns List<Post>
 
+            if (!String.IsNullOrEmpty(PostTag))
+            {
+                var tag = db.Tags.Where(x => x.Description == PostTag).First();
+                posts = posts.Where(x => x.Tags.Contains(tag)).ToList();
+            }
+
+            // Paging
+                     
             var pageNumber = page ?? 1;
 
             var onePageOfPosts = posts.ToPagedList(pageNumber, 5); // will only contain 5 posts
 
             ViewBag.Page = onePageOfPosts;
+
             return View();
         }
 
-        //
-        // GET: /Mensajes/
-
-        //public ActionResult Index()
-        //{
-        //    return View(db.Posts.ToList());
-        //}
-
-        //
-        // GET: /Mensajes/Details/5
+        // GET: /Details/5
 
         public ActionResult Details(int id = 0)
         {
@@ -49,7 +62,7 @@ namespace Blog.Controllers
         }
 
         //
-        // GET: /Mensajes/Create
+        // GET: /Create
 
         public ActionResult Create()
         {
@@ -57,7 +70,7 @@ namespace Blog.Controllers
         }
 
         //
-        // POST: /Mensajes/Create
+        // POST: /Create
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -77,7 +90,7 @@ namespace Blog.Controllers
         }
 
         //
-        // GET: /Mensajes/Edit/5
+        // GET: /Edit/5
 
         public ActionResult Edit(int id = 0)
         {
@@ -90,7 +103,7 @@ namespace Blog.Controllers
         }
 
         //
-        // POST: /Mensajes/Edit/5
+        // POST: /Edit/5
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -106,7 +119,7 @@ namespace Blog.Controllers
         }
 
         //
-        // GET: /Mensajes/Delete/5
+        // GET: /Delete/5
 
         public ActionResult Delete(int id = 0)
         {
@@ -119,7 +132,7 @@ namespace Blog.Controllers
         }
 
         //
-        // POST: /Mensajes/Delete/5
+        // POST: /Delete/5
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -129,6 +142,46 @@ namespace Blog.Controllers
             db.Posts.Remove(post);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        //
+        // GET: /Reply
+
+        [Authorize]
+        public ActionResult Reply(int id = 0)
+        {
+            PostReply postReply = new PostReply();
+            postReply.PostId = id;
+            
+            if ( db.Posts.Find(id) == null)
+            {
+                return HttpNotFound();
+            }
+            return View(postReply);
+        }
+        
+
+        //
+        // POST: /Reply
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Reply(PostReply postReply)
+        {  
+            Reply reply = new Reply(); 
+
+            if (ModelState.IsValid)
+            {               
+                reply.Message = postReply.Comment;
+                reply.Date = System.DateTime.Now;
+                reply.Replier = db.UserProfiles.Find(WebSecurity.CurrentUserId);
+                Post post = db.Posts.Include(x=> x.Replies).Where(x => x.Id == postReply.PostId).First();
+                post.Replies.Add(reply); //para que gurde la relacion
+                db.Replies.Add(reply);               
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(postReply);
         }
 
         protected override void Dispose(bool disposing)
